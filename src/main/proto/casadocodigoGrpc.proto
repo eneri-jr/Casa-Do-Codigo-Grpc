@@ -1,0 +1,155 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.zup";
+option java_outer_classname = "CasadocodigoGrpc";
+option objc_class_prefix = "HLW";
+
+import "google/protobuf/timestamp.proto";
+package br.com.zup;
+
+service CadastraNovoAutorService {
+  rpc cadastrar(NovoAutorRequest) returns (NovoAutorResponse) {}
+}
+
+service CadastraNovaCategoriaService {
+  rpc cadastrar(NovaCategoriaRequest) returns (NovaCategoriaResponse) {}
+}
+
+service CadastraNovoLivroService {
+  rpc cadastrar(NovoLivroRequest) returns (NovoLivroResponse) {}
+}
+
+service ListaLivrosService {
+  rpc listar(ListaLivrosRequest) returns (ListaLivrosResponse) {}
+}
+
+service DetalhaLivroService {
+  rpc detalhar(DetalhaLivroRequest) returns (DetalhaLivroResponse) {}
+}
+
+service CadastraNovoPaisService {
+  rpc cadastrar(NovoPaisRequest) returns (NovoPaisResponse) {}
+}
+
+service CadastraNovoEstadoService {
+  rpc cadastrar(NovoEstadoRequest) returns (NovoEstadoResponse) {}
+}
+
+service CadastraNovaVendaService {
+  rpc cadastrar(NovaVendaRequest) returns (NovaVendaResponse) {}
+}
+
+message NovoAutorRequest {
+  string nome = 1;
+  string email = 2;
+  string descricao = 3;
+}
+
+message NovoAutorResponse {
+  int64 autorId = 1;
+}
+
+message NovaCategoriaRequest {
+  string nome = 1;
+}
+
+message NovaCategoriaResponse {
+  int64 categoriaId = 1;
+}
+
+message NovoLivroRequest {
+  string titulo = 1;
+  string resumo = 2;
+  string sumario = 3;
+  double preco = 4;
+  int32 paginas = 5;
+  string isbn = 6;
+  google.protobuf.Timestamp dataPublicacao = 7;
+  int64 Categoriaid = 8;
+  int64 Autorid = 9;
+}
+
+message NovoLivroResponse {
+  int64 livroId = 1;
+}
+
+message ListaLivrosRequest {
+
+}
+
+message ListaLivrosResponse {
+
+  message InfoLivros{
+    int64 livroId = 1;
+    string nomeLivro = 2;
+  }
+
+  repeated InfoLivros livros = 1;
+}
+
+message DetalhaLivroRequest {
+  int64 livroId = 1;
+}
+
+message Autor {
+  string nome = 1;
+  string descricao = 2;
+}
+
+message DetalhaLivroResponse {
+  string titulo = 1;
+  string resumo = 2;
+  string sumario = 3;
+  double preco = 4;
+  int32 paginas = 5;
+  string isbn = 6;
+  google.protobuf.Timestamp dataPublicacao = 7;
+  string categoria = 8;
+  Autor autor = 9;
+}
+
+message NovoPaisRequest {
+  string nome = 1;
+}
+
+message NovoPaisResponse {
+  int64 paisId = 1;
+}
+
+message NovoEstadoRequest {
+  string nome = 1;
+  int64 paisId = 2;
+}
+
+message NovoEstadoResponse {
+  int64 estadoId = 1;
+}
+
+message NovaVendaRequest {
+  string email = 1;
+  string nome = 2;
+  string sobrenome = 3;
+  string documento = 4;
+  string endereco = 5;
+  string complemento = 6;
+  string cidade = 7;
+  int64 paisId = 8;
+  int64 estadoId = 9;
+  string telefone = 10;
+  string cep = 11;
+}
+
+message NovaVendaResponse {
+  string email = 1;
+  string nome = 2;
+  string sobrenome = 3;
+  string documento = 4;
+  string endereco = 5;
+  string complemento = 6;
+  string cidade = 7;
+  string pais = 8;
+  string estado = 9;
+  string telefone = 10;
+  string cep = 11;
+}
